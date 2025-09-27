@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,381 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/assets/css/custom.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #dc2626;
+            --dark-red: #b91c1c;
+            --light-red: #f87171;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #000000;
+            --card-bg: #171717;
+            --text-light: #f5f5f5;
+            --text-muted: #a3a3a3;
+            --border-color: #404040;
+            --primary-gradient: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+            --secondary-gradient: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+            --dark-gradient: linear-gradient(135deg, #0a0a0a 0%, #262626 100%);
+            --success-gradient: linear-gradient(135deg, #dc2626 0%, #450a0a 100%);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.4);
+            --border-radius-xl: 1rem;
+            --border-radius-2xl: 1.5rem;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        /* Custom Navigation */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            color: var(--text-light) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--light-red) !important;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dc2626' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Services Section */
+        .services-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .services-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .services-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-red);
+        }
+
+        .services-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Team Section */
+        .team-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-red);
+        }
+
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-img {
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(0.3);
+        }
+
+        .team-card:hover .team-img {
+            transform: scale(1.05);
+            filter: grayscale(0);
+        }
+
+        .social-links-team a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .social-links-team a:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px);
+            border-color: var(--primary-red);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-20c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23dc2626' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-gradient);
+            transform: translateY(-3px);
+            border-color: var(--primary-red);
+        }
+
+        /* Progress Bars */
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .skill-percentage {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .progress {
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                margin-right: 0.75rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .team-img {
+                height: 250px;
+            }
+        }
+
+        /* Text Colors */
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .display-4, .display-5, .display-6 {
+            color: var(--text-light);
+        }
+
+        .lead {
+            color: var(--text-muted);
+        }
+
+        .bg-light {
+            background-color: var(--card-bg) !important;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">
                 <i class="bi bi-bootstrap-fill me-2"></i>BootstrapUI Explorer
@@ -25,16 +394,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link " 
-                           href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" 
-                           href="about.html">About</a>
+                        <a class="nav-link active" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " 
-                           href="contact.html">Contact</a>
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -44,114 +410,275 @@
     <!-- Main Content -->
     <main>
         <!-- Page Header -->
-<section class="bg-primary text-white py-5" style="margin-top: 76px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold">About Our Services</h1>
-                <p class="lead">We specialize in creating modern, responsive websites using the latest web technologies</p>
+        <section class="page-header text-white py-5" style="margin-top: 76px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center" data-aos="fade-up" data-aos-duration="800">
+                        <h1 class="display-4 fw-bold mb-3">About Our Services</h1>
+                        <p class="lead mb-0">We specialize in creating modern, responsive websites using the latest web technologies</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Services Section -->
-<section class="py-5">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6">
-                <h2 class="display-6 fw-bold mb-4">Our Expertise</h2>
-                <p class="text-muted mb-4">
-                    We are passionate about creating beautiful, functional websites that deliver exceptional user experiences. 
-                    Our team specializes in Bootstrap 5 development, ensuring your website is responsive, accessible, and modern.
-                </p>
-                
-                <div class="d-flex align-items-center mb-3">
-                    <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
-                    <span>Responsive Web Design</span>
+        <!-- Services Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                        <h2 class="display-6 fw-bold mb-4">Our Expertise</h2>
+                        <p class="text-muted mb-4">
+                            We are passionate about creating beautiful, functional websites that deliver exceptional user experiences. 
+                            Our team specializes in Bootstrap 5 development, ensuring your website is responsive, accessible, and modern.
+                        </p>
+                        
+                        <div class="services-card p-4 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-phone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Responsive Web Design</h5>
+                                    <p class="text-muted mb-0">Creating websites that work perfectly on all devices from mobile to desktop.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="services-card p-4 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-bootstrap"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Bootstrap 5 Customization</h5>
+                                    <p class="text-muted mb-0">Tailoring Bootstrap components to match your brand identity.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="services-card p-4 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-palette"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">UI/UX Design Principles</h5>
+                                    <p class="text-muted mb-0">Applying best practices for intuitive and engaging user experiences.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="services-card p-4 mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="feature-icon">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Performance Optimization</h5>
+                                    <p class="text-muted mb-0">Ensuring fast loading times and smooth interactions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="contact.html" class="btn btn-gradient mt-3">Get in Touch</a>
+                    </div>
+                    
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="Our Team" class="img-fluid rounded shadow" style="border: 1px solid var(--border-color);">
+                    </div>
                 </div>
-                <div class="d-flex align-items-center mb-3">
-                    <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
-                    <span>Bootstrap 5 Customization</span>
-                </div>
-                <div class="d-flex align-items-center mb-3">
-                    <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
-                    <span>UI/UX Design Principles</span>
-                </div>
-                <div class="d-flex align-items-center mb-4">
-                    <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
-                    <span>Performance Optimization</span>
-                </div>
-                
-                <a href="contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
             </div>
-            
-            <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                     alt="Our Team" class="img-fluid rounded shadow">
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Team Section -->
-<section class="bg-light py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-bold">Meet Our Team</h2>
-            <p class="lead text-muted">Experienced professionals dedicated to your success</p>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib&#x3D;rb-4.0.3&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;400&amp;q&#x3D;80" class="card-img-top" alt="John Smith" 
-                         style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">John Smith</h5>
-                        <p class="text-muted">Lead Developer</p>
-                        <p class="card-text">Specialized in Bootstrap frameworks and responsive design.</p>
+        <!-- Stats Section -->
+        <section class="stats-section py-5 text-white">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 stat-item" data-aos="fade-up" data-aos-duration="800">
+                        <div class="stat-number" data-count="150">0</div>
+                        <p class="text-muted">Projects Completed</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                        <div class="stat-number" data-count="98">0</div>
+                        <p class="text-muted">Happy Clients</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="stat-number" data-count="5">0</div>
+                        <p class="text-muted">Years Experience</p>
+                    </div>
+                    <div class="col-md-3 col-6 stat-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="stat-number" data-count="24">0</div>
+                        <p class="text-muted">Support Hours</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib&#x3D;rb-4.0.3&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;400&amp;q&#x3D;80" class="card-img-top" alt="Sarah Johnson" 
-                         style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Sarah Johnson</h5>
-                        <p class="text-muted">UI/UX Designer</p>
-                        <p class="card-text">Creates intuitive and beautiful user interfaces.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                        <h2 class="display-6 fw-bold mb-4">Our Skills & Technologies</h2>
+                        <p class="text-muted mb-4">
+                            We leverage the latest technologies and frameworks to deliver cutting-edge web solutions 
+                            that meet modern standards and user expectations.
+                        </p>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Bootstrap 5</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">HTML5 & CSS3</span>
+                                <span class="skill-percentage">98%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">UI/UX Design</span>
+                                <span class="skill-percentage">92%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                        <div class="services-card h-100 p-4">
+                            <h4 class="fw-bold mb-3">Why Choose Us?</h4>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Proven track record of successful projects</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Modern and responsive design approach</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Attention to detail and quality assurance</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Timely delivery and excellent communication</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Ongoing support and maintenance</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-primary me-3 fs-5"></i>
+                                <span class="text-light">Competitive pricing and flexible packages</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib&#x3D;rb-4.0.3&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;400&amp;q&#x3D;80" class="card-img-top" alt="Mike Davis" 
-                         style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Mike Davis</h5>
-                        <p class="text-muted">Frontend Developer</p>
-                        <p class="card-text">Expert in modern JavaScript and CSS frameworks.</p>
+        </section>
+
+        <!-- Team Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                    <h2 class="display-5 fw-bold">Meet Our Team</h2>
+                    <p class="lead text-muted">Experienced professionals dedicated to your success</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                        <div class="team-card">
+                            <div class="overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                     class="card-img-top team-img" alt="John Smith">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title mb-1">John Smith</h5>
+                                <p class="text-primary mb-2">Lead Developer</p>
+                                <p class="card-text text-muted mb-3">Specialized in Bootstrap frameworks and responsive design with 8+ years of experience.</p>
+                                <div class="social-links-team">
+                                    <a href="#" class="me-2" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" class="me-2" title="GitHub"><i class="bi bi-github"></i></a>
+                                    <a href="#" title="Twitter"><i class="bi bi-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="team-card">
+                            <div class="overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                     class="card-img-top team-img" alt="Sarah Johnson">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title mb-1">Sarah Johnson</h5>
+                                <p class="text-primary mb-2">UI/UX Designer</p>
+                                <p class="card-text text-muted mb-3">Creates intuitive and beautiful user interfaces with a focus on user experience.</p>
+                                <div class="social-links-team">
+                                    <a href="#" class="me-2" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" class="me-2" title="Dribbble"><i class="bi bi-dribbble"></i></a>
+                                    <a href="#" title="Behance"><i class="bi bi-palette"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="team-card">
+                            <div class="overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                     class="card-img-top team-img" alt="Mike Davis">
+                            </div>
+                            <div class="card-body text-center p-4">
+                                <h5 class="card-title mb-1">Mike Davis</h5>
+                                <p class="text-primary mb-2">Frontend Developer</p>
+                                <p class="card-text text-muted mb-3">Expert in modern JavaScript and CSS frameworks with a passion for clean code.</p>
+                                <div class="social-links-team">
+                                    <a href="#" class="me-2" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" class="me-2" title="GitHub"><i class="bi bi-github"></i></a>
+                                    <a href="#" title="CodePen"><i class="bi bi-code-slash"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-5 mt-5">
+    <footer class="bg-dark text-light py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold">BootstrapUI Explorer</h5>
                     <p class="text-muted">Modern responsive website built with Bootstrap 5</p>
                     <div class="social-links">
-                        <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-light me-2"><i class="bi bi-linkedin"></i></a>
                         <a href="#" class="text-light"><i class="bi bi-github"></i></a>
                     </div>
                 </div>
@@ -189,7 +716,82 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Custom JS -->
-    <script src="/assets/js/main.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Animated counter for statistics
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200; // The lower the slower
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const count = parseInt(counter.innerText);
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.min(count + increment, target);
+                    setTimeout(() => animateCounter(), 1);
+                }
+            });
+        }
+
+        // Animate progress bars
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('aria-valuenow') + '%';
+                bar.style.width = width;
+            });
+        }
+
+        // Initialize animations when section is in view
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stats-section')) {
+                        animateCounter();
+                    }
+                    if (entry.target.classList.contains('bg-light')) {
+                        animateProgressBars();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        const statsSection = document.querySelector('.stats-section');
+        const skillsSection = document.querySelector('.bg-light');
+        
+        if (statsSection) observer.observe(statsSection);
+        if (skillsSection) observer.observe(skillsSection);
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.5)';
+            }
+        });
+    </script>
 </body>
 </html>
