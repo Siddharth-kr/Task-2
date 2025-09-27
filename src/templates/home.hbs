@@ -1,0 +1,89 @@
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white py-5" style="margin-top: 76px;">
+    <div class="container">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Build Amazing Websites with Bootstrap 5</h1>
+                <p class="lead mb-4">Discover the power of modern web development with responsive design, customizable components, and powerful utilities.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#features" class="btn btn-light btn-lg">Explore Features</a>
+                    <a href="contact.html" class="btn btn-outline-light btn-lg">Get Started</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="Web Development" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Why Choose Bootstrap 5?</h2>
+            <p class="lead text-muted">Powerful features that make web development faster and easier</p>
+        </div>
+        
+        <div class="row g-4">
+            {{#each features}}
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <i class="bi {{this.icon}} display-4 text-primary mb-3"></i>
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text text-muted">{{this.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+<!-- Carousel Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Featured Projects</h2>
+            <p class="lead text-muted">See what you can build with Bootstrap 5</p>
+        </div>
+        
+        <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {{#times projects.length}}
+                <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="{{this}}" 
+                        {{#if_eq this 0}}class="active"{{/if_eq}}></button>
+                {{/times}}
+            </div>
+            <div class="carousel-inner rounded-3">
+                {{#each projects}}
+                <div class="carousel-item {{#if_eq @index 0}}active{{/if_eq}}">
+                    <img src="{{this.image}}" class="d-block w-100" alt="{{this.title}}" 
+                         style="height: 400px; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{this.title}}</h5>
+                        <p>{{this.description}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">Join thousands of developers building amazing websites with Bootstrap 5</p>
+        <a href="contact.html" class="btn btn-light btn-lg px-5">Contact Us Today</a>
+    </div>
+</section>

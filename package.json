@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap5-ui-exploration",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:templates && vite --host",
+    "build": "npm run build:templates && vite build",
+    "preview": "vite preview",
+    "build:templates": "node build.js"
+  },
+  "devDependencies": {
+    "handlebars": "^4.7.8",
+    "vite": "^5.4.20"
+  },
+  "dependencies": {
+    "handlebars-helpers": "^0.10.0"
+  },
+  "description": "- **Templating Engine**: Handlebars - **Bundler**: Vite",
+  "main": "build.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
